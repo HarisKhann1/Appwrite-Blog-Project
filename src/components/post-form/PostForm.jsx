@@ -6,9 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 export default function PostForm({post}) {
-    console.log(post);
-    
-    
+
     const {
             register, handleSubmit, watch,
             setValue, getValues, control
@@ -46,8 +44,9 @@ export default function PostForm({post}) {
                 navigate('/post/${dbPost.$id}');
             }
         } else {
+            // for create post
             const file = await service.uploadFile(data.image[0]);
-            
+            // if file is uploaded then create a new post
             if (file) {
                 const fileId = file.$id
                 data.featuredImage = fileId
@@ -58,7 +57,8 @@ export default function PostForm({post}) {
                     }
                 );
                 if (dbPost) {
-                    navigate('/post/${dbPost.$id}')
+                    navigate(`/post/${dbPost.$id}`);
+
                 }
             } 
         
